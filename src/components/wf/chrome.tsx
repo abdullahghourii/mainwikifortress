@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 const NAV = [
   { label: "How It Works", href: "#principles" },
   { label: "Our Process", href: "#process" },
+  { label: "Services", href: "/services" },
   { label: "Eligibility", href: "#criteria" },
   { label: "EVIDENCE™", href: "#evidence" },
   { label: "Case Studies", href: "#cases" },
@@ -60,16 +61,26 @@ export function SiteHeader() {
         </Link>
 
         <nav className="hidden min-w-0 flex-1 items-center justify-center gap-4 xl:flex 2xl:gap-6">
-          {NAV.map((item) => (
-            <Link
-              key={item.href}
-              to="/"
-              hash={item.href.slice(1)}
-              className="whitespace-nowrap text-[0.78rem] font-light tracking-wide text-muted-foreground transition-colors hover:text-foreground 2xl:text-[0.8125rem]"
-            >
-              {item.label}
-            </Link>
-          ))}
+          {NAV.map((item) =>
+            item.href.startsWith("#") ? (
+              <Link
+                key={item.href}
+                to="/"
+                hash={item.href.slice(1)}
+                className="whitespace-nowrap text-[0.78rem] font-light tracking-wide text-muted-foreground transition-colors hover:text-foreground 2xl:text-[0.8125rem]"
+              >
+                {item.label}
+              </Link>
+            ) : (
+              <Link
+                key={item.href}
+                to={item.href}
+                className="whitespace-nowrap text-[0.78rem] font-light tracking-wide text-muted-foreground transition-colors hover:text-foreground 2xl:text-[0.8125rem]"
+              >
+                {item.label}
+              </Link>
+            ),
+          )}
         </nav>
 
         <div className="ml-auto flex shrink-0 items-center gap-2 sm:gap-3">
@@ -97,21 +108,33 @@ export function SiteHeader() {
         id="mobile-navigation"
         className={cn(
           "overflow-hidden border-t border-border bg-background transition-[max-height,opacity] duration-300 xl:hidden",
-          menuOpen ? "max-h-[620px] opacity-100" : "max-h-0 border-t-transparent opacity-0",
+          menuOpen ? "max-h-[680px] opacity-100" : "max-h-0 border-t-transparent opacity-0",
         )}
       >
         <nav className="mx-auto grid max-w-[1440px] gap-1 px-4 py-4 sm:px-6 lg:px-8">
-          {NAV.map((item) => (
-            <Link
-              key={item.href}
-              to="/"
-              hash={item.href.slice(1)}
-              onClick={() => setMenuOpen(false)}
-              className="border-b border-border/70 px-2 py-3 text-sm font-light tracking-wide text-muted-foreground transition-colors hover:text-foreground"
-            >
-              {item.label}
-            </Link>
-          ))}
+          {NAV.map((item) =>
+            item.href.startsWith("#") ? (
+              <Link
+                key={item.href}
+                to="/"
+                hash={item.href.slice(1)}
+                onClick={() => setMenuOpen(false)}
+                className="border-b border-border/70 px-2 py-3 text-sm font-light tracking-wide text-muted-foreground transition-colors hover:text-foreground"
+              >
+                {item.label}
+              </Link>
+            ) : (
+              <Link
+                key={item.href}
+                to={item.href}
+                onClick={() => setMenuOpen(false)}
+                className="border-b border-border/70 px-2 py-3 text-sm font-light tracking-wide text-muted-foreground transition-colors hover:text-foreground"
+              >
+                {item.label}
+              </Link>
+            ),
+          )}
+
           <Link
             to="/request-evaluation"
             onClick={() => setMenuOpen(false)}
@@ -129,6 +152,7 @@ const FOOTER_NAV: Array<{ label: string; href: string }> = [
   { label: "Home", href: "#top" },
   { label: "How Wikipedia Thinks", href: "#principles" },
   { label: "Our Process", href: "#process" },
+  { label: "Services", href: "/services" },
   { label: "The EVIDENCE™ Framework", href: "#evidence" },
   { label: "Eligibility Criteria", href: "#criteria" },
   { label: "Profile Comparison", href: "#comparison" },
@@ -168,6 +192,7 @@ export function SiteFooter() {
               <p>Because trust is earned through honesty. Not promises.</p>
             </div>
           </div>
+
           <div>
             <div className="eyebrow text-primary-foreground/50">Navigation</div>
             <ul className="mt-6 grid gap-x-8 gap-y-3 sm:grid-cols-2">
@@ -183,7 +208,7 @@ export function SiteFooter() {
                     </Link>
                   ) : (
                     <Link
-                      to="/request-evaluation"
+                      to={item.href}
                       className="text-[0.9375rem] text-primary-foreground/80 transition-colors hover:text-primary-foreground"
                     >
                       {item.label}
@@ -206,6 +231,7 @@ export function SiteFooter() {
               <br />
               <span className="italic text-primary-foreground/60">Each must be earned.</span>
             </div>
+
             <div className="text-[0.9375rem] leading-[1.8] font-light text-primary-foreground/60">
               <p>
                 At WikiFortress, every recommendation begins with evidence and ends with honest
@@ -214,6 +240,7 @@ export function SiteFooter() {
               <p className="eyebrow mt-6 text-primary-foreground/50">Truth Before Transaction</p>
             </div>
           </div>
+
           <p className="eyebrow mt-12 text-primary-foreground/35">
             © {new Date().getFullYear()} WikiFortress — Independent Advisory
           </p>

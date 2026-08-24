@@ -22,7 +22,7 @@ import { KnowledgeCenter, Faq, FinalCta, FAQ } from "@/components/wf/knowledge";
 import { EligibilityCriteria } from "@/components/wf/criteria";
 import { RoundCursor } from "@/components/wf/cursor";
 
-const SITE_URL = "https://wiki-truth-seeker.lovable.app";
+const SITE_URL = "https://wikifortress.com";
 
 export const Route = createFileRoute("/")({
   head: () => ({
